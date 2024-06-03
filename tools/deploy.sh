@@ -1,15 +1,18 @@
 #!/bin/sh
 
-cd ~/projects/acceleratedturn.com/
-export zipFile=/tmp/at.zip
-rm -f $zipFile
-zip -r $zipFile www docker-compose.yml
+echo "USE s3-deploy.sh"
+exit 1
 
-target=master
+# cd ~/projects/acceleratedturn.com/
+# export zipFile=/tmp/at.zip
+# rm -f $zipFile
+# zip -r $zipFile www docker-compose.yml
 
-sftp ${target} <<END
-put $zipFile
-put tools/at-install.sh
-END
+# target=master
 
-ssh ${target} sh at-install.sh
+# sftp ${target} <<END
+# put $zipFile
+# put tools/at-install.sh
+# END
+
+# ssh ${target} sh at-install.sh
