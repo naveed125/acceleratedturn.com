@@ -23,7 +23,7 @@ We combine career counseling, leadership development, and technology guidance to
             From Pilot to Powerhouse
         </h1>
         <p class="font-bold text-gray-300 md:text-lg tracking-wide mb-2">
-            Scaling AI with Impact
+            Hosted by Svilta
         </p>
         <p class="text-lg leading-relaxed text-gray-200 mb-1">
             A high-impact panel where finance, data, and engineering leaders came together to tackle one of today’s biggest challenges: how to scale AI beyond the prototype.
@@ -34,4 +34,25 @@ We combine career counseling, leadership development, and technology guidance to
             </a>                
         </div>
     </div>
+        <div class="w-full pt-8 px-6 max-w-7xl mx-auto rounded-[20px] overflow-hidden bg-cover bg-center">
+        <hr/> 
+    </div>
+    <div class="w-full pt-8 px-6 max-w-7xl mx-auto rounded-[20px] overflow-hidden bg-cover bg-center" 
+         style="background-image: url('/images/pathfinders-revelo.png');">
+        <h1 class="text-3xl md:text-3xl font-normal uppercase text-white mb-4">
+            Path finders
+        </h1>
+        <p class="font-bold text-gray-300 md:text-lg tracking-wide mb-2">
+            Hosted by Revelo
+        </p>
+        <p class="text-lg leading-relaxed text-gray-200 mb-1">
+            How gamer passion, data discipline, and AI innovation help to scale one of the world’s largest gaming analytics platforms.
+        </p>
+        <div class="flex flex-col sm:flex-row mb-5">
+            <a href="https://www.linkedin.com/pulse/naveeds-next-level-revelohq-tg2zf/" class="inline-block text-center bg-white text-[#10124E] px-8 py-3.5 rounded-full1 font-semibold hover:bg-gray-100 transition-colors duration-300">
+                Learn More
+            </a>                
+        </div>
+    </div>
+
 </div>
