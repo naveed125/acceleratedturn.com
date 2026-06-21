@@ -69,5 +69,3 @@ permalink: /
         </div>
     </div>
 </div>
-<!-- AI Receptionist Widget -->
-<script src="https://ai-receptionist.store/widget-embed.js" data-business-id="7ba8fd9e-92a9-4ce5-a1a8-49a256c83a35" async></script>
