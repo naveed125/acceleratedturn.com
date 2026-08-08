@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order Entry — Version A</title>
+<style>
+  :root{
+    --face:#d4d0c8; --hi:#ffffff; --sh:#808080; --dk:#000000; --sel:#0a246a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:22px 16px 40px;
+    background:#3a6ea5;
+    font-family:Tahoma,"MS Sans Serif",Geneva,sans-serif;
+    font-size:11px; color:#000;
+    display:flex; justify-content:center;
+    -webkit-font-smoothing:antialiased;
+  }
+  .window{
+    width:100%; max-width:840px; background:var(--face); padding:3px;
+    box-shadow: inset 1px 1px 0 var(--hi), inset 2px 2px 0 var(--face),
+                inset -1px -1px 0 var(--dk), inset -2px -2px 0 var(--sh);
+  }
+  .titlebar{
+    background:linear-gradient(90deg,#0a246a 0%,#3f6fbe 60%,#a6caf0 100%);
+    color:#fff; font-weight:bold; padding:3px 3px 3px 5px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .titlebar .t{flex:1;}
+  .tbtn{
+    width:16px; height:14px; background:var(--face); color:#000;
+    font-size:9px; font-weight:bold; line-height:12px; text-align:center;
+    box-shadow: inset 1px 1px 0 var(--hi), inset 2px 2px 0 var(--face),
+                inset -1px -1px 0 var(--dk), inset -2px -2px 0 var(--sh);
+  }
+  .menubar{padding:2px 1px; border-bottom:1px solid var(--face);}
+  .menubar span{padding:2px 7px; display:inline-block;}
+  .menubar span:hover{background:var(--sel); color:#fff;}
+  .menubar u{text-decoration:underline;}
+  .client{padding:8px 9px 9px;}
+
+  fieldset{
+    border:1px solid var(--sh); margin:0 0 8px; padding:8px 10px 10px;
+    box-shadow: 1px 1px 0 var(--hi), inset -1px -1px 0 var(--hi);
+  }
+  legend{padding:0 4px; margin-left:2px;}
+
+  .hdrstrip{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:9px; padding:0 2px;}
+  .hdrstrip .cell{display:flex; align-items:center; gap:6px;}
+
+  .row{display:flex; align-items:center; margin-bottom:5px;}
+  .row label{width:104px; flex:none;}
+  .cols{display:flex; gap:22px; flex-wrap:wrap;}
+  .cols .col{flex:1; min-width:250px;}
+
+  .fld{
+    font-family:inherit; font-size:11px; background:#fff; color:#000;
+    border:0; height:19px; padding:2px 3px; min-width:0;
+    box-shadow: inset 1px 1px 0 var(--sh), inset 2px 2px 0 var(--dk),
+                inset -1px -1px 0 var(--hi), inset -2px -2px 0 var(--face);
+  }
+  .fld[readonly]{background:var(--face);}
+  .grow{flex:1;}
+  .w60{width:60px;} .w90{width:90px;} .w120{width:120px;} .w150{width:150px;}
+  .req{color:#c00; font-weight:bold; margin-left:3px;}
+
+  .combo{display:flex; align-items:center; width:120px;}
+  .combo .fld{flex:1;}
+  .combo .arw{
+    width:17px; height:19px; background:var(--face); font-size:8px;
+    line-height:17px; text-align:center; flex:none;
+    box-shadow: inset 1px 1px 0 var(--hi), inset 2px 2px 0 var(--face),
+                inset -1px -1px 0 var(--dk), inset -2px -2px 0 var(--sh);
+  }
+
+  .chk,.rad{display:flex; align-items:center; gap:6px; margin-bottom:6px;}
+  .box{
+    width:13px; height:13px; flex:none; background:#fff; font-size:10px;
+    line-height:12px; text-align:center; font-family:Tahoma,sans-serif;
+    box-shadow: inset 1px 1px 0 var(--sh), inset 2px 2px 0 var(--dk),
+                inset -1px -1px 0 var(--hi), inset -2px -2px 0 var(--face);
+  }
+  .circ{
+    width:12px; height:12px; flex:none; border-radius:50%; background:#fff;
+    border:1px solid var(--sh); border-top-color:var(--dk); border-left-color:var(--dk);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .circ i{width:4px; height:4px; border-radius:50%; background:#000; display:block;}
+
+  table.grid{border-collapse:collapse; width:100%; background:#fff;
+    box-shadow: inset 1px 1px 0 var(--sh), inset 2px 2px 0 var(--dk),
+                inset -1px -1px 0 var(--hi), inset -2px -2px 0 var(--face);}
+  table.grid th{
+    background:var(--face); font-weight:normal; text-align:left; padding:2px 5px; height:19px;
+    box-shadow: inset 1px 1px 0 var(--hi), inset -1px -1px 0 var(--sh);
+  }
+  table.grid td{padding:2px 5px; height:19px; border-right:1px solid #d4d0c8; border-bottom:1px solid #ececec;}
+  .num{text-align:right;}
+
+  .totals{display:flex; justify-content:flex-end; margin-top:8px;}
+  .totals table{border-collapse:collapse;}
+  .totals td{padding:2px 4px;}
+  .totals td.v{text-align:right; width:88px;}
+  .totals tr.grand td{font-weight:bold; border-top:1px solid var(--sh); padding-top:4px;}
+
+  textarea.notes{
+    font-family:inherit; font-size:11px; width:100%; height:44px; resize:none;
+    border:0; padding:3px 4px; background:#fff;
+    box-shadow: inset 1px 1px 0 var(--sh), inset 2px 2px 0 var(--dk),
+                inset -1px -1px 0 var(--hi), inset -2px -2px 0 var(--face);
+  }
+
+  .btnrow{display:flex; justify-content:flex-end; gap:6px; margin-top:10px;}
+  .btn{
+    font-family:inherit; font-size:11px; background:var(--face); color:#000;
+    border:0; min-width:78px; height:23px; padding:0 10px; cursor:default;
+    box-shadow: inset 1px 1px 0 var(--hi), inset 2px 2px 0 var(--face),
+                inset -1px -1px 0 var(--dk), inset -2px -2px 0 var(--sh);
+  }
+  .btn:active{box-shadow: inset 1px 1px 0 var(--sh), inset 2px 2px 0 var(--dk),
+                inset -1px -1px 0 var(--hi), inset -2px -2px 0 var(--face);}
+  .btn.def{font-weight:bold; outline:1px solid #000; outline-offset:1px;}
+  .btn:focus-visible{outline:2px dotted #000; outline-offset:-4px;}
+
+  .statusbar{display:flex; gap:3px; padding:2px 2px 1px; margin-top:2px;}
+  .statusbar div{
+    padding:2px 6px; background:var(--face);
+    box-shadow: inset 1px 1px 0 var(--sh), inset -1px -1px 0 var(--hi);
+  }
+  .statusbar .s1{flex:1;}
+</style>
+</head>
+<body>
+<div class="window" role="application" aria-label="Order Entry, Version A">
+
+  <div class="titlebar">
+    <span aria-hidden="true">▣</span>
+    <span class="t">Order Entry</span>
+    <span class="tbtn" aria-hidden="true">_</span>
+    <span class="tbtn" aria-hidden="true">□</span>
+    <span class="tbtn" aria-hidden="true">✕</span>
+  </div>
+
+  <div class="menubar">
+    <span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>T</u>ools</span><span><u>H</u>elp</span>
+  </div>
+
+  <div class="client">
+
+    <div class="hdrstrip">
+      <div class="cell"><label>Order Number:</label><input class="fld w120" value="SO-2024-018742" readonly></div>
+      <div class="cell"><label>Order Date:</label><input class="fld w90" value="03/14/2024" readonly></div>
+      <div class="cell"><label>Status:</label><input class="fld w60" value="Open" readonly></div>
+      <div class="cell"><label>Sales Rep:</label><input class="fld w90" value="J. Smith" readonly></div>
+    </div>
+
+    <fieldset>
+      <legend>Customer Information</legend>
+      <div class="cols">
+        <div class="col">
+          <div class="row"><label>Customer ID:<span class="req">*</span></label><input class="fld w120" value="CUST-4471"></div>
+          <div class="row"><label>Company Name:<span class="req">*</span></label><input class="fld grow" value="Northwind Traders Inc."></div>
+          <div class="row"><label>Contact Name:</label><input class="fld grow" value="Margaret Chen"></div>
+        </div>
+        <div class="col">
+          <div class="row"><label>Phone:</label><input class="fld w120" value="(415) 555-0182"></div>
+          <div class="row"><label>Email:</label><input class="fld grow" value="m.chen@northwindtraders.com"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Shipping Information</legend>
+      <div class="cols">
+        <div class="col">
+          <div class="row"><label>Ship To Address:<span class="req">*</span></label><input class="fld grow" value="1420 Harrison Street"></div>
+          <div class="row"><label>City:</label><input class="fld w150" value="San Francisco"></div>
+          <div class="row"><label>State / ZIP:</label><input class="fld w60" value="CA">&nbsp;<input class="fld w90" value="94103"></div>
+        </div>
+        <div class="col">
+          <div class="row"><label>Country:</label><input class="fld w150" value="United States"></div>
+          <div class="row"><label>Ship Via:</label>
+            <div class="combo"><input class="fld" value="2-Day Air" readonly><span class="arw">▼</span></div>
+          </div>
+          <div class="row"><label>Req. Delivery:</label><input class="fld w90" value="03/21/2024"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Line Items</legend>
+      <table class="grid">
+        <thead>
+          <tr>
+            <th style="width:84px">Item #</th>
+            <th>Description</th>
+            <th class="num" style="width:52px">Qty</th>
+            <th class="num" style="width:74px">Unit Price</th>
+            <th class="num" style="width:56px">Disc %</th>
+            <th class="num" style="width:82px">Extended</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>WID-1001</td><td>Widget Assembly, 10mm</td><td class="num">24</td><td class="num">12.50</td><td class="num">0</td><td class="num">300.00</td></tr>
+          <tr><td>GRM-2043</td><td>Grommet, Rubber, Blue</td><td class="num">150</td><td class="num">0.75</td><td class="num">5</td><td class="num">106.88</td></tr>
+          <tr><td>BRK-7788</td><td>Mounting Bracket, Steel</td><td class="num">12</td><td class="num">34.95</td><td class="num">0</td><td class="num">419.40</td></tr>
+          <tr><td>FST-3312</td><td>Fastener Kit, M6</td><td class="num">8</td><td class="num">9.99</td><td class="num">10</td><td class="num">71.93</td></tr>
+        </tbody>
+      </table>
+
+      <div class="totals">
+        <table>
+          <tr><td>Subtotal:</td><td class="v">898.21</td></tr>
+          <tr><td>Tax (8.625%):</td><td class="v">77.47</td></tr>
+          <tr><td>Shipping:</td><td class="v">45.00</td></tr>
+          <tr class="grand"><td>Order Total:</td><td class="v">1,020.68</td></tr>
+        </table>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Order Options</legend>
+      <div class="cols">
+        <div class="col">
+          <div class="chk"><span class="box"></span><span>Rush Order</span></div>
+          <div class="chk"><span class="box">✔</span><span>Signature Required</span></div>
+          <div class="chk"><span class="box">✔</span><span>Email Confirmation</span></div>
+        </div>
+        <div class="col">
+          <div style="margin-bottom:5px;">Payment Terms:</div>
+          <div class="rad"><span class="circ"><i></i></span><span>Net 30</span></div>
+          <div class="rad"><span class="circ"></span><span>Net 60</span></div>
+          <div class="rad"><span class="circ"></span><span>COD</span></div>
+          <div class="rad"><span class="circ"></span><span>Prepaid</span></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Notes</legend>
+      <textarea class="notes">Customer requests all items shipped in a single carton. Do not split shipment.</textarea>
+    </fieldset>
+
+    <div class="btnrow">
+      <button class="btn def">Save Draft</button>
+      <button class="btn">Submit Order</button>
+      <button class="btn">Print</button>
+      <button class="btn">Cancel</button>
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <div class="s1">Ready</div>
+    <div>User: jsmith</div>
+    <div>03/14/2024 10:42 AM</div>
+  </div>
+</div>
+</body>
+</html>

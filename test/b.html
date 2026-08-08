@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order Entry — Version B</title>
+<style>
+  :root{
+    --ink:#131a27;
+    --canvas:#e9edf4;
+    --paper:#ffffff;
+    --line:#dce2ec;
+    --line-soft:#eef1f6;
+    --muted:#5b6a80;
+    --accent:#2440cc;
+    --accent-soft:#edf0fd;
+    --danger:#c0392b;
+    --radius:10px;
+    --ui: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --data: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:28px 18px 56px;
+    background:var(--canvas); color:var(--ink);
+    font-family:var(--ui); font-size:14px; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    display:flex; justify-content:center;
+  }
+  .sheet{width:100%; max-width:900px;}
+
+  /* ---- page head ---- */
+  .head{margin-bottom:20px;}
+  .eyebrow{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; margin-bottom:6px;
+  }
+  h1{font-size:26px; letter-spacing:-.02em; margin:0; font-weight:650;}
+
+  /* ---- card ---- */
+  .card{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px 24px; margin-bottom:14px;
+  }
+
+  /* ---- meta strip ---- */
+  .meta{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
+        border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin-bottom:14px;}
+  .meta .m{background:var(--paper); padding:14px 16px;}
+  .meta .k{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:600;}
+  .meta .v{font-family:var(--data); font-size:14px; margin-top:3px; letter-spacing:-.01em;}
+  .pill{display:inline-block; font-family:var(--ui); font-size:12px; font-weight:600;
+        background:var(--accent-soft); color:var(--accent); padding:1px 9px; border-radius:99px;}
+
+  /* ---- section header ---- */
+  .sec{display:flex; align-items:center; gap:10px; margin:0 0 18px;}
+  .sec span{font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--ink);}
+  .sec:before{content:""; width:3px; height:13px; background:var(--accent); border-radius:2px; flex:none;}
+  .sec:after{content:""; flex:1; height:1px; background:var(--line);}
+
+  /* ---- fields ---- */
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px 28px;}
+  .f label{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+           color:var(--muted); font-weight:600; margin-bottom:5px;}
+  .f .req{color:var(--danger); margin-left:2px;}
+  .in{
+    width:100%; font-family:var(--data); font-size:14px; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line); border-radius:7px;
+    padding:9px 11px; transition:border-color .12s, box-shadow .12s;
+  }
+  .in:hover{border-color:#c3ccda;}
+  .in:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  .in[readonly]{background:#f6f8fb; color:var(--muted);}
+  select.in{appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='7'><path d='M1 1l4.5 4.5L10 1' fill='none' stroke='%235b6a80' stroke-width='1.6'/></svg>");
+    background-repeat:no-repeat; background-position:right 11px center; padding-right:30px;}
+  .pair{display:grid; grid-template-columns:80px 1fr; gap:10px;}
+
+  /* ---- line items ---- */
+  table{width:100%; border-collapse:collapse;}
+  thead th{
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    font-weight:700; text-align:left; padding:0 12px 9px; border-bottom:1px solid var(--line);
+  }
+  tbody td{padding:12px; border-bottom:1px solid var(--line-soft); font-family:var(--data); font-size:13.5px;}
+  tbody tr:last-child td{border-bottom:0;}
+  tbody td.desc{font-family:var(--ui); font-size:14px;}
+  th.num,td.num{text-align:right; font-variant-numeric:tabular-nums;}
+  .sku{color:var(--accent); font-weight:600;}
+
+  .totals{display:flex; justify-content:flex-end; margin-top:16px; padding-top:16px; border-top:1px solid var(--line);}
+  .totals dl{margin:0; display:grid; grid-template-columns:auto 118px; gap:9px 26px; min-width:280px;}
+  .totals dt{color:var(--muted); font-size:13px;}
+  .totals dd{margin:0; text-align:right; font-family:var(--data); font-size:13.5px; font-variant-numeric:tabular-nums;}
+  .totals .g-dt{font-weight:700; color:var(--ink); font-size:15px; padding-top:9px; border-top:1px solid var(--line);}
+  .totals .g-dd{font-weight:700; font-size:16px; padding-top:9px; border-top:1px solid var(--line);}
+
+  /* ---- options ---- */
+  .opt{display:flex; align-items:center; gap:10px; margin-bottom:11px; font-size:14px;}
+  .opt input{width:16px; height:16px; accent-color:var(--accent); margin:0; cursor:pointer;}
+  .opt:last-child{margin-bottom:0;}
+
+  textarea.in{resize:vertical; min-height:76px; font-family:var(--ui); line-height:1.55;}
+
+  /* ---- actions ---- */
+  .actions{display:flex; justify-content:flex-end; gap:10px; margin-top:18px;}
+  .btn{
+    font-family:var(--ui); font-size:14px; font-weight:600; padding:10px 20px;
+    border-radius:8px; border:1px solid var(--line); background:var(--paper); color:var(--ink);
+    cursor:pointer; transition:background .12s, border-color .12s;
+  }
+  .btn:hover{background:#f5f7fb; border-color:#c3ccda;}
+  .btn.ghost{border-color:transparent; color:var(--muted);}
+  .btn.ghost:hover{background:#f1f4f9;}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .btn.primary:hover{background:#1c33a8; border-color:#1c33a8;}
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  footer{display:flex; gap:20px; color:var(--muted); font-size:12px; margin-top:16px; padding:0 4px;}
+  footer .sp{flex:1;}
+  footer .d{font-family:var(--data);}
+
+  @media (max-width:720px){
+    .grid2{grid-template-columns:1fr;}
+    .meta{grid-template-columns:1fr 1fr;}
+    .actions{flex-direction:column-reverse;}
+    .btn{width:100%;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="head">
+    <div class="eyebrow">Sales · Order Desk</div>
+    <h1>Order Entry</h1>
+  </div>
+
+  <div class="meta">
+    <div class="m"><div class="k">Order Number</div><div class="v">SO-2024-018472</div></div>
+    <div class="m"><div class="k">Order Date</div><div class="v">03/14/2024</div></div>
+    <div class="m"><div class="k">Status</div><div class="v"><span class="pill">Open</span></div></div>
+    <div class="m"><div class="k">Sales Rep</div><div class="v">J. Smith</div></div>
+  </div>
+
+  <div class="card">
+    <div class="sec"><span>Customer Information</span></div>
+    <div class="grid2">
+      <div class="f"><label>Customer ID</label><input class="in" value="CUST-4471"></div>
+      <div class="f"><label>Company Name<span class="req">*</span></label><input class="in" value="Northwind Traders, Inc."></div>
+      <div class="f"><label>Contact Name</label><input class="in" value="Margaret Chen"></div>
+      <div class="f"><label>Phone</label><input class="in" value="(415) 555-0128"></div>
+      <div class="f" style="grid-column:1 / -1;"><label>Email</label><input class="in" value="m.chen@northwindtrader.com"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec"><span>Shiping Information</span></div>
+    <div class="grid2">
+      <div class="f" style="grid-column:1 / -1;"><label>Ship To Address<span class="req">*</span></label><input class="in" value="1420 Harrison Street"></div>
+      <div class="f"><label>City</label><input class="in" value="San Francisco"></div>
+      <div class="f"><label>State / ZIP</label>
+        <div class="pair"><input class="in" value="CA"><input class="in" value="94103"></div>
+      </div>
+      <div class="f"><label>Ship Via</label>
+        <select class="in">
+          <option selected>Ground</option>
+          <option>2-Day Air</option>
+          <option>Overnight</option>
+        </select>
+      </div>
+      <div class="f"><label>Req. Delivery</label><input class="in" value="03/12/2024"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec"><span>Line Items</span></div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:104px">Item #</th>
+          <th>Description</th>
+          <th class="num" style="width:62px">Qty</th>
+          <th class="num" style="width:92px">Unit Price</th>
+          <th class="num" style="width:72px">Disc %</th>
+          <th class="num" style="width:100px">Line Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="sku">WID-1001</td><td class="desc">Widget Assembly, 10mm</td><td class="num">24</td><td class="num">12.50</td><td class="num">0</td><td class="num">300.00</td></tr>
+        <tr><td class="sku">GRM-2043</td><td class="desc">Grommet, Rubber, Blue</td><td class="num">105</td><td class="num">0.75</td><td class="num">5</td><td class="num">106.88</td></tr>
+        <tr><td class="sku">FST-3312</td><td class="desc">Fastener Kit, M8</td><td class="num">8</td><td class="num">9.99</td><td class="num">10</td><td class="num">71.93</td></tr>
+        <tr><td class="sku">BRK-7788</td><td class="desc">Mounting Bracket, Steel</td><td class="num">12</td><td class="num">34.95</td><td class="num">0</td><td class="num">419.40</td></tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <dl>
+        <dt>Subtotal</dt><dd>898.21</dd>
+        <dt>Tax (8.25%)</dt><dd>77.47</dd>
+        <dt>Shipping</dt><dd>45.00</dd>
+        <dt class="g-dt">Order Total</dt><dd class="g-dd">1,020.68</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec"><span>Order Options</span></div>
+    <div class="grid2">
+      <div>
+        <label class="opt"><input type="checkbox"> Rush Order</label>
+        <label class="opt"><input type="checkbox"> Signature Required</label>
+        <label class="opt"><input type="checkbox" checked> Email Confirmation</label>
+      </div>
+      <div>
+        <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;">Payment Terms</div>
+        <label class="opt"><input type="radio" name="terms"> Net 30</label>
+        <label class="opt"><input type="radio" name="terms" checked> Net 60</label>
+        <label class="opt"><input type="radio" name="terms"> COD</label>
+        <label class="opt"><input type="radio" name="terms"> Prepaid</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec"><span>Notes</span></div>
+    <textarea class="in">Customer requests all items shipped in a single carton. Do not split shipment.</textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn ghost">Cancel</button>
+    <button class="btn">Save Draft</button>
+    <button class="btn primary">Place Order</button>
+  </div>
+
+  <footer>
+    <span class="sp">Ready</span>
+    <span>User: jsmith</span>
+    <span class="d">03/14/2024 10:42 AM</span>
+  </footer>
+</div>
+</body>
+</html>
