@@ -8,6 +8,7 @@ Ensure you have "bundle" installed
 
 ```
 gem install jekyll bundler
+bundle config set --local path 'vendor/bundle'
 bundle install
 ```
 
@@ -16,6 +17,3 @@ Run local site
 ```
 bundle exec jekyll serve --livereload
 ```
-
-
-
