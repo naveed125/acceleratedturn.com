@@ -1,0 +1,31 @@
+# Client case studies shown in the "Client work" section.
+#
+# Entries with `placeholder: true` render only in local development
+# (`bundle exec jekyll serve`) and are hidden on the live site. Delete the
+# `placeholder` line to publish an entry. If no publishable entries exist,
+# the section and its nav link are hidden.
+#
+# Required: type, title, summary
+# Optional: client, outcomes, duration, team
+# type: Migration | Modernization | AI deployment | Product build
+
+- type: Migration
+  title: "Legacy C# desktop app migrated to a modern web application"
+  summary: "The client relied on a legacy C# desktop application that had to be installed and updated machine by machine. We migrated it to a modern web application that runs in the browser."
+  outcomes:
+    - "Runs in any browser, with no desktop installs to manage"
+    - "One deployment updates every user at once"
+
+- type: Product build
+  title: "A social media platform built for elder care"
+  summary: "We built a social media platform for the elder care space from the ground up, delivered as a complete, working product."
+  outcomes:
+    - "Greenfield build covering product, backend, and front end"
+    - "Purpose-built for elder care rather than adapted from a generic social app"
+
+- type: AI deployment
+  title: "A configuration helper bot powered by a small language model"
+  summary: "We built a bot that helps users through configuration, running on a small language model (SLM): a compact model that is cheaper and faster to run than a large general-purpose one."
+  outcomes:
+    - "Answers configuration questions in plain language"
+    - "Runs on an SLM instead of a large general-purpose model"

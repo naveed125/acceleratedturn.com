@@ -1,5 +1,21 @@
-description: GET BACK ON TRACK
-remote_theme: pages-themes/tactile@v0.2.0
+title: Accelerated Turn
+description: >-
+  Migrations, modernization, and AI forward deployments, delivered as single
+  projects by one senior engineer using modern agentic tools.
+url: https://acceleratedturn.com
+logo: /images/logo.png
+lang: en-US
 plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+  - jekyll-seo-tag
+  - jekyll-sitemap
+twitter:
+  username: AcceleratedTurn
+social:
+  name: Accelerated Turn
+  links:
+    - https://www.linkedin.com/company/acceleratedturn
+    - https://x.com/AcceleratedTurn
+calendly: https://calendly.com/acceleratedturn
+linkedin: https://www.linkedin.com/company/acceleratedturn
+x_url: https://x.com/AcceleratedTurn
 google_analytics: UA-155052422-2

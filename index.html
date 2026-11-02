@@ -1,0 +1,366 @@
+---
+layout: default
+title: Migrations, Modernization & AI Deployment
+description: >-
+  Single-project engineering engagements: migrations, modernization, and AI
+  forward deployments, delivered in weeks by one senior engineer using modern
+  agentic tools.
+permalink: /
+---
+{% assign work = site.data.work %}
+{% if jekyll.environment == "production" %}
+  {% assign work = work | where_exp: "item", "item.placeholder != true" %}
+{% endif %}
+{% assign placeholders = work | where: "placeholder", true %}
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Project-based engineering</span>
+      <h1>The project your team keeps pushing to next quarter, <span class="accent">shipped in weeks.</span></h1>
+      <p class="lead">
+        We take on single, well-scoped engineering projects (<strong>migrations, modernization, and AI forward deployments</strong>)
+        and deliver them with one senior engineer running modern agentic tools.
+        We've done it for other teams. We can do it for yours.
+      </p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="{{ site.calendly }}" target="_blank" rel="noopener">Book a 30-minute scoping call</a>
+        <a class="btn btn-ghost" href="#services">See what we take on</a>
+      </div>
+      <ul class="hero-facts">
+        <li><strong>One engineer, start to finish</strong><span>The person who scopes it with you is the person who ships it.</span></li>
+        <li><strong>Fixed scope and price</strong><span>Agreed in writing before any work begins.</span></li>
+        <li><strong>Your repo, your stack</strong><span>Reviewed PRs, tests, and docs that you own.</span></li>
+      </ul>
+    </div>
+
+    <div class="plan" aria-label="Sample engagement plan">
+      <div class="plan-head">
+        <span>Sample engagement plan</span>
+        <span class="plan-status">On track</span>
+      </div>
+      <p class="plan-title">Legacy MySQL monolith &rarr; Postgres on AWS</p>
+      <dl class="plan-meta">
+        <div><dt>Team</dt><dd>1 senior engineer + agents</dd></div>
+        <div><dt>Price</dt><dd>Fixed, agreed up front</dd></div>
+      </dl>
+      <ol class="plan-steps">
+        <li class="done"><span class="wk">Wk 1</span><span>Audit, migration plan, rollback path</span></li>
+        <li class="done"><span class="wk">Wk 2</span><span>Schema port, dual writes, backfill</span></li>
+        <li class="active"><span class="wk">Wk 3</span><span>Shadow reads, load test, verification</span></li>
+        <li><span class="wk">Wk 4</span><span>Cutover, decommission, handover</span></li>
+      </ol>
+      <p class="plan-foot">Agents draft the changes. The engineer reviews every one before it merges.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section section-sand">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What we take on</span>
+      <h2>Three kinds of projects, each delivered end to end.</h2>
+      <p>No retainers and no staff augmentation. You bring one project with a clear outcome; we scope it, ship it, and hand it over. These are engagements we've already delivered for clients.</p>
+    </div>
+
+    <div class="cards-3">
+      <article class="service">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14l-4-4"/><path d="M20 16H6l4 4"/></svg>
+        </div>
+        <h3>Migrations</h3>
+        <p class="tagline">Move it without breaking it.</p>
+        <p class="desc">Cloud, database, framework, and platform moves, planned around your uptime with a rollback path at every step.</p>
+        <h4>Typical projects</h4>
+        <ul class="tags">
+          <li>Heroku or on-prem to AWS / GCP</li>
+          <li>MongoDB or MySQL to Postgres</li>
+          <li>Framework and runtime upgrades</li>
+          <li>Monolith to services</li>
+        </ul>
+        <h4>You get</h4>
+        <ul class="checks">
+          <li>A written migration plan with rollback at each stage</li>
+          <li>Dual-run and verified cutover</li>
+          <li>The old system decommissioned, not left running</li>
+        </ul>
+      </article>
+
+      <article class="service">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>
+        </div>
+        <h3>Modernization</h3>
+        <p class="tagline">Make legacy code easy to change again.</p>
+        <p class="desc">The system nobody wants to touch, brought up to modern standards incrementally, without a risky big-bang rewrite.</p>
+        <h4>Typical projects</h4>
+        <ul class="tags">
+          <li>Legacy UI to modern web app</li>
+          <li>Tests for untested code</li>
+          <li>Dependency and security debt</li>
+          <li>CI/CD and observability</li>
+        </ul>
+        <h4>You get</h4>
+        <ul class="checks">
+          <li>A test safety net before anything changes</li>
+          <li>Incremental replacement, shipped continuously</li>
+          <li>Docs your team will actually use</li>
+        </ul>
+      </article>
+
+      <article class="service">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>
+        </div>
+        <h3>AI forward deployment</h3>
+        <p class="tagline">Get the AI pilot into production.</p>
+        <p class="desc">An engineer embedded with your team to take one AI use case from demo to a system real users rely on.</p>
+        <h4>Typical projects</h4>
+        <ul class="tags">
+          <li>LLM features in your product</li>
+          <li>Agents and internal automation</li>
+          <li>Search and Q&amp;A over your data</li>
+          <li>Evals, guardrails, cost controls</li>
+        </ul>
+        <h4>You get</h4>
+        <ul class="checks">
+          <li>A working feature in production</li>
+          <li>An evaluation suite and monitoring</li>
+          <li>A playbook so your team can run it after we leave</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="approach" class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why it's fast</span>
+      <h2>One senior engineer and a fleet of AI agents. No coordination tax.</h2>
+      <p>Most projects don't slip because the code is hard. They slip on handoffs, meetings, and context lost between people. We remove those. One senior engineer owns your project and uses modern agentic coding tools for the volume work that used to need a whole team.</p>
+    </div>
+
+    <div class="split">
+      <div class="panel">
+        <h3>Agents handle the volume</h3>
+        <p class="sub">Work that used to take extra hands, done in parallel.</p>
+        <ul class="checks">
+          <li>Map an unfamiliar codebase and its dependencies</li>
+          <li>Write characterization and regression tests</li>
+          <li>Apply mechanical changes across hundreds of files</li>
+          <li>Generate migration scripts, backfills, and verification checks</li>
+          <li>Draft docs and runbooks from the real code</li>
+        </ul>
+      </div>
+      <div class="panel panel-dark">
+        <h3>The engineer owns the judgment</h3>
+        <p class="sub">The decisions that make or break a project stay with a person.</p>
+        <ul class="checks">
+          <li>Architecture, sequencing, and trade-offs</li>
+          <li>Review of every change before it merges</li>
+          <li>Cutover, rollback, and risk decisions</li>
+          <li>Day-to-day communication with your team</li>
+          <li>Accountability for the result</li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="compare">
+      <caption class="sr-only">Typical agency team compared with Accelerated Turn</caption>
+      <thead>
+        <tr><th scope="col"><span class="sr-only">Aspect</span></th><th scope="col">Typical agency team</th><th scope="col" class="us">Accelerated Turn</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">People on your project</th><td class="them" data-label="Typical agency">PM, tech lead, several developers, QA</td><td class="us" data-label="Accelerated Turn">One senior engineer, backed by AI agents</td></tr>
+        <tr><th scope="row">Who you talk to</th><td class="them" data-label="Typical agency">An account or project manager</td><td class="us" data-label="Accelerated Turn">The engineer doing the work</td></tr>
+        <tr><th scope="row">Getting started</th><td class="them" data-label="Typical agency">Weeks of onboarding and ramp-up</td><td class="us" data-label="Accelerated Turn">First pull requests in week one</td></tr>
+        <tr><th scope="row">Tracking progress</th><td class="them" data-label="Typical agency">Status meetings and slide decks</td><td class="us" data-label="Accelerated Turn">Weekly demos and reviewable PRs in your repo</td></tr>
+        <tr><th scope="row">When it ends</th><td class="them" data-label="Typical agency">Knowledge leaves with a rotating team</td><td class="us" data-label="Accelerated Turn">Docs, runbooks, and a handover walkthrough</td></tr>
+      </tbody>
+    </table>
+
+    <ul class="guardrails">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <div><strong>Human review on every merge</strong><span>Nothing ships that the engineer hasn't read.</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+        <div><strong>Tests and CI on what we touch</strong><span>Changes come with proof they work.</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <div><strong>Inside your access controls</strong><span>We work in your repos and accounts, with least-privilege access.</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg>
+        <div><strong>Your code stays yours</strong><span>Business-tier AI tools that don't train on your code.</span></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="process" class="section section-sand">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>From first call to handover, with no surprises in between.</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>Scoping call</h3>
+        <p>Tell us what's stuck. In 30 minutes we'll tell you honestly whether it's a fit and roughly what it takes.</p>
+        <span class="chip">30 min, free</span>
+      </li>
+      <li>
+        <h3>Written proposal</h3>
+        <p>Scope, deliverables, milestones, and a fixed price, with a definition of done agreed before work starts.</p>
+        <span class="chip">Fixed price</span>
+      </li>
+      <li>
+        <h3>Build</h3>
+        <p>Work lands in your repo as reviewable pull requests. You get a demo every week and async updates in between.</p>
+        <span class="chip">Weekly demos</span>
+      </li>
+      <li>
+        <h3>Handover</h3>
+        <p>Docs, runbooks, and a walkthrough with your team, so your engineers own it from the day we finish.</p>
+        <span class="chip">You own everything</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{% if work.size > 0 %}
+<section id="work" class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Client work</span>
+      <h2>Projects we've delivered.</h2>
+      <p>A sample of recent engagements. Some clients are under NDA, so details are anonymized. We're happy to walk through specifics on a call.</p>
+    </div>
+    {% if placeholders.size > 0 %}
+    <p class="dev-note">Local preview only: dashed cards are placeholders from <code>_data/work.yml</code> and are hidden on the live site.</p>
+    {% endif %}
+    <div class="work-grid">
+      {% for item in work %}
+      <article class="work{% if item.placeholder %} is-placeholder{% endif %}">
+        <div class="work-body">
+          <div class="work-top">
+            <span class="pill">{{ item.type }}</span>
+            {% if item.placeholder %}<span class="pill pill-warn">Placeholder</span>{% endif %}
+          </div>
+          {% if item.client %}<p class="work-client">{{ item.client }}</p>{% endif %}
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.summary }}</p>
+          {% if item.outcomes %}
+          <ul class="checks">
+            {% for outcome in item.outcomes %}<li>{{ outcome }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% if item.duration or item.team %}
+        <div class="work-meta">
+          {% if item.duration %}<span>Duration <strong>{{ item.duration }}</strong></span>{% endif %}
+          {% if item.team %}<span>Team <strong>{{ item.team }}</strong></span>{% endif %}
+        </div>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="team" class="section{% if work.size > 0 %} section-sand{% endif %}">
+  <div class="container team">
+    <div class="section-head">
+      <span class="eyebrow">Who you're working with</span>
+      <h2>Senior engineers who've run production at scale.</h2>
+      <p>Accelerated Turn is led by Naveed Khan, an engineering leader at one of the world's largest gaming analytics platforms. Every engagement is run by a senior engineer, never a junior team learning on your codebase.</p>
+      <div class="ctas">
+        <a class="btn btn-outline" href="{{ site.linkedin }}" target="_blank" rel="noopener">Follow us on LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="media-list">
+      <p class="media-label">Featured</p>
+      <a class="media" href="https://svitla.com/event/ai-for-cfos-panel-networking-event/" target="_blank" rel="noopener">
+        <img src="{{ '/images/panel-svitla.jpeg' | relative_url }}" alt="Naveed Khan speaking on a panel" loading="lazy" width="168" height="100" style="object-position: 88% center">
+        <div>
+          <span class="kicker">Panel, hosted by Svitla</span>
+          <h3>From Pilot to Powerhouse</h3>
+          <p>Finance, data, and engineering leaders on scaling AI beyond the prototype.</p>
+        </div>
+      </a>
+      <a class="media" href="https://www.linkedin.com/pulse/naveeds-next-level-revelohq-tg2zf/" target="_blank" rel="noopener">
+        <img src="{{ '/images/pathfinders-revelo-thumb.jpg' | relative_url }}" alt="Naveed Khan, Revelo Path Finders feature" loading="lazy" width="168" height="100" style="object-position: 75% center">
+        <div>
+          <span class="kicker">Profile, Revelo Path Finders</span>
+          <h3>Scaling a gaming analytics platform</h3>
+          <p>How data discipline and AI help scale one of the world's largest gaming analytics platforms.</p>
+        </div>
+      </a>
+      <a class="media" href="https://effective-programmer.com/how-i-actually-automate-everything-0d97ed624a34" target="_blank" rel="noopener">
+        <img src="{{ '/images/automation-thumb.jpg' | relative_url }}" alt="" loading="lazy" width="168" height="100">
+        <div>
+          <span class="kicker">Article, Effective Programmer</span>
+          <h3>How I automate everything</h3>
+          <p>The systems and tools behind automating engineering work end to end.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section{% unless work.size > 0 %} section-sand{% endunless %}">
+  <div class="container faq-wrap">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2>What clients ask before they sign.</h2>
+      <p>Something else on your mind? Bring it to the call.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="{{ site.calendly }}" target="_blank" rel="noopener">Book a scoping call</a>
+      </div>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>Can one engineer really deliver a project this size?</summary>
+        <p>For a well-scoped project, yes. That's why we scope first. Agentic tools take on the volume work that used to need extra people, and a single owner means no handoffs. If your project genuinely needs more than one engineer, we'll tell you on the first call, not after the contract is signed.</p>
+      </details>
+      <details>
+        <summary>What if the scope changes mid-project?</summary>
+        <p>It happens. We flag it as soon as we see it, explain the trade-off, and agree any change in writing before acting on it. No surprise invoices.</p>
+      </details>
+      <details>
+        <summary>How do you use AI with our code?</summary>
+        <p>Inside your repositories and access controls, using business-tier AI tools that don't train on your code. Agents draft changes; the engineer reviews every one and is accountable for what merges. If you have tooling or data-handling requirements, we work within them.</p>
+      </details>
+      <details>
+        <summary>Who owns the work?</summary>
+        <p>You do. Code, docs, and infrastructure live in your accounts from the first commit.</p>
+      </details>
+      <details>
+        <summary>How is a project priced?</summary>
+        <p>Each project gets a fixed price, quoted in the written proposal after the scoping call. You'll know the number and exactly what it covers before you commit to anything.</p>
+      </details>
+      <details>
+        <summary>Will you work with our existing team?</summary>
+        <p>Yes. We work in your repo, your tracker, and your chat, and pair with your engineers wherever it makes the handover stronger.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark cta">
+  <div class="container">
+    <h2>Have a project stuck on the roadmap?</h2>
+    <p>Book a 30-minute call. You'll leave knowing whether it's a fit, how we'd approach it, and what happens next.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="{{ site.calendly }}" target="_blank" rel="noopener">Book a scoping call</a>
+      <a class="btn btn-ghost" href="{{ site.linkedin }}" target="_blank" rel="noopener">Message us on LinkedIn</a>
+    </div>
+  </div>
+</section>
