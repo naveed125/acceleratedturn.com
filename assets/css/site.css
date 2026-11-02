@@ -147,7 +147,6 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--brand); outlin
 @media (max-width: 640px) { .hero { padding: 64px 0 56px; } }
 
 .hero h1 { color: #fff; font-size: clamp(38px, 5.4vw, 62px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
-.hero h1 .accent { color: var(--brand); }
 .hero .lead { max-width: 600px; margin-top: 26px; font-size: 20px; color: var(--on-dark-muted); }
 .hero .lead strong { color: #fff; font-weight: 600; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
